@@ -23,23 +23,27 @@ public class AppUser implements UserDetails {
             sequenceName = "user_sequence",
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "user_sequence")
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(unique = true) // Assuming email should be unique
+    @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "created_at", nullable = false)
+    private Long registeredAtt;
+
     @Enumerated(EnumType.STRING)
+    @Column(name = "user_role")
     private UserRole userRole;
-
-    private boolean locked = false;
-
-    private boolean enabled = false;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -64,7 +68,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return !locked;
+        return false;
     }
 
     @Override
@@ -74,6 +78,6 @@ public class AppUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return enabled;
+        return true;
     }
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.app.service.imp.EmailSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -20,7 +21,7 @@ public class EmailService implements EmailSender {
 
     @Override
     @Async
-    public void send(String to, String email) throws IllegalAccessException {
+    public void send(String to, String email)  {
         try {
             MimeMessage mimeMailMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMailMessage, "utf-8");
@@ -32,7 +33,7 @@ public class EmailService implements EmailSender {
 
         } catch (MessagingException messagingException) {
             LOGGER.error("faild to send email ", messagingException);
-            throw new IllegalAccessException("faild to send email ..");
+            throw new MailSendException("faild to send email ..");
         }
     }
 }

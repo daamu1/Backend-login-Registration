@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Registration {
+public class RegistrationReqPayload {
 
     @NotBlank(message = "First name is required")
     private String firstName;

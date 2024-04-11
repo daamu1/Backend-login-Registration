@@ -1,11 +1,12 @@
 package org.app.registration;
 
 import lombok.AllArgsConstructor;
-import org.app.paylaod.request.Registration;
-import org.app.payload.request.RegistrationRequest; // Make sure this import matches your package and class structure
+import org.app.paylaod.request.RegistrationReqPayload;
 import org.app.service.RegistrationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/registration")
@@ -20,7 +21,7 @@ public class RegistrationController {
      * @return a response entity with registration status
      */
     @PostMapping
-    public ResponseEntity<String> register(@RequestBody Registration request) {
+    public ResponseEntity<String> register(@RequestBody @Valid RegistrationReqPayload request) {
         String response = registrationService.registration(request);
         return ResponseEntity.ok(response);
     }
