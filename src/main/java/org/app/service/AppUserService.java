@@ -1,10 +1,11 @@
-package org.email.service;
+package org.app.service;
 
 import lombok.AllArgsConstructor;
-import org.email.entity.AppUser;
-import org.email.repository.UserRepository;
-import org.email.tokens.ConfirmationToken;
-import org.email.repository.ConfirmationTokenRepository;
+import org.app.constant.Constant;
+import org.app.model.AppUser;
+import org.app.repository.UserRepository;
+import org.app.tokens.ConfirmationToken;
+import org.app.repository.ConfirmationTokenRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,14 +18,13 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class AppUserService implements UserDetailsService {
-    private final static String USER_NOT_FOUND_MSG = "User with email %s not found";
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenRepository confirmationTokenRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG)));
+        return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(String.format(Constant.USER_NOT_FOUND_MSG)));
     }
 
     public String signUpUser(AppUser appUser) throws IllegalAccessException {

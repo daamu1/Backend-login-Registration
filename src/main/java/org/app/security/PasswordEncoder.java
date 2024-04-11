@@ -1,4 +1,4 @@
-package org.email.security;
+package org.app.security;
 
 
 import org.springframework.context.annotation.Bean;

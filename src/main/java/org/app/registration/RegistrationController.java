@@ -1,8 +1,8 @@
-package org.email.registration;
+package org.app.registration;
 
 import lombok.AllArgsConstructor;
-import org.email.entity.Registration;
-import org.email.service.RegistrationService;
+import org.app.model.Registration;
+import org.app.service.RegistrationService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

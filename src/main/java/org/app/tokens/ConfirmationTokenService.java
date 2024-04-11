@@ -1,7 +1,7 @@
-package org.email.tokens;
+package org.app.tokens;
 
 import lombok.AllArgsConstructor;
-import org.email.repository.ConfirmationTokenRepository;
+import org.app.repository.ConfirmationTokenRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

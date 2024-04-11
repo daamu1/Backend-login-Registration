@@ -1,7 +1,7 @@
-package org.email.service;
+package org.app.service;
 
 import lombok.AllArgsConstructor;
-import org.email.service.imp.EmailSender;
+import org.app.service.imp.EmailSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;

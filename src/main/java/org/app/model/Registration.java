@@ -1,4 +1,4 @@
-package org.email.entity;
+package org.app.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

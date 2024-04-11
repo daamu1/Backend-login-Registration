@@ -1,4 +1,4 @@
-package org.email.registration;
+package org.app.registration;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

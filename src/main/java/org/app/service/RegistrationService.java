@@ -1,13 +1,13 @@
-package org.email.service;
+package org.app.service;
 
 import lombok.AllArgsConstructor;
-import org.email.entity.AppUser;
-import org.email.entity.Registration;
-import org.email.enums.AppUserRole;
-import org.email.registration.EmailValidator;
-import org.email.service.imp.EmailSender;
-import org.email.tokens.ConfirmationToken;
-import org.email.tokens.ConfirmationTokenService;
+import org.app.model.AppUser;
+import org.app.model.Registration;
+import org.app.enums.UserRole;
+import org.app.registration.EmailValidator;
+import org.app.service.imp.EmailSender;
+import org.app.tokens.ConfirmationToken;
+import org.app.tokens.ConfirmationTokenService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +29,7 @@ private ConfirmationTokenService confirmationTokenService;
                 request.getLastName()
                 , request.getEmail()
                 , request.getPassword(),
-                AppUserRole.USER));
+                UserRole.USER));
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
         emailSender.send(
                 request.getEmail(),

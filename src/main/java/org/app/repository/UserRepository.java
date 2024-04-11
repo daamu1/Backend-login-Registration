@@ -1,10 +1,9 @@
-package org.email.repository;
+package org.app.repository;
 
-import org.email.entity.AppUser;
+import org.app.model.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.expression.spel.ast.OpAnd;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

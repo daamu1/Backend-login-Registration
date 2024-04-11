@@ -1,6 +1,6 @@
-package org.email.security.config;
+package org.app.security.config;
 import lombok.AllArgsConstructor;
-import org.email.service.AppUserService;
+import org.app.service.AppUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
