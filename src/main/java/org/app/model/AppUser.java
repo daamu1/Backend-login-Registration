@@ -38,12 +38,23 @@ public class AppUser implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "created_at", nullable = false)
-    private Long registeredAtt;
+    @Column(name = "registered_at", nullable = false)
+    private Long registeredAt;
+
+    @Column(name = "email_verified", nullable = false)
+    private boolean emailVerified;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
     private UserRole userRole;
+
+    public AppUser(String firstName, String lastName, String email, String password, UserRole userRole) {
+        this.userRole = userRole;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

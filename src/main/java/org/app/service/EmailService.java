@@ -21,8 +21,8 @@ public class EmailService implements EmailSender {
     private final static Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
     private final JavaMailSender mailSender;
 
-    @Override
     @Async
+    @Override
     public void send(String to, String email) {
         try {
             MimeMessage mimeMailMessage = mailSender.createMimeMessage();
@@ -34,8 +34,8 @@ public class EmailService implements EmailSender {
             mailSender.send(mimeMailMessage);
 
         } catch (MessagingException messagingException) {
-            LOGGER.error("faild to send email ", messagingException);
-            throw new MailSendException("faild to send email ..");
+            LOGGER.error("failed to send email ", messagingException);
+            throw new MailSendException("failed to send email to " + to);
         }
     }
 }

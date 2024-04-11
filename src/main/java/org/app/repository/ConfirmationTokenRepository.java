@@ -1,4 +1,5 @@
 package org.app.repository;
+import org.app.model.AppUser;
 import org.app.model.ConfirmationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -11,8 +12,7 @@ import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
-public interface ConfirmationTokenRepository
-        extends JpaRepository<ConfirmationToken, Long> {
+public interface ConfirmationTokenRepository extends JpaRepository<ConfirmationToken, Long> {
 
     Optional<ConfirmationToken> findByToken(String token);
 
@@ -22,5 +22,7 @@ public interface ConfirmationTokenRepository
             "SET c.confirmedAt = ?2 " +
             "WHERE c.token = ?1")
     void updateConfirmedAt(String token,
-                          LocalDateTime confirmedAt);
+                          Long confirmedAt);
+
+    ConfirmationToken findByAppUser(AppUser user);
 }

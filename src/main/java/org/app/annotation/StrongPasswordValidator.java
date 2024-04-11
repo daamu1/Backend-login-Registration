@@ -33,7 +33,7 @@ public class StrongPasswordValidator implements ConstraintValidator<StrongPasswo
         }
 
         // Check for at least one special character
-        if (!value.matches(".*[!@#$%^&*()_+\\-=[\\]{};':\"\\\\|,.<>/?].*")) {
+        if (!value.matches(".*[!@#$%^&*()_+\\-\\[\\]{};':\"\\\\|,.<>/?].*")) {
             return false;
         }
 

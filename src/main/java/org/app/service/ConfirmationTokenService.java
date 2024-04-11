@@ -24,6 +24,6 @@ public class ConfirmationTokenService {
 
     public void setConfirmedAt(String token) {
         confirmationTokenRepository.updateConfirmedAt(
-                token, LocalDateTime.now());
+                token, System.currentTimeMillis());
     }
 }

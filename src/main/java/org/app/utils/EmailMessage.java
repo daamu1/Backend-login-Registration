@@ -1,6 +1,16 @@
 package org.app.utils;
 
+import org.app.service.imp.EmailSender;
+
 public class EmailMessage {
+
+    public static void sendConfirmationEmail(EmailSender emailSender, String email, String firstName, String token) {
+        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+        emailSender.send(
+                email,
+                EmailMessage.buildEmail(firstName, link)
+        );
+    }
     public static String buildEmail(String name, String link) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +
