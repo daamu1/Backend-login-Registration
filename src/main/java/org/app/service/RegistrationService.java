@@ -19,7 +19,7 @@ public class RegistrationService {
     private final AppUserService appUserService;
     private final EmailSender emailSender;
 private ConfirmationTokenService confirmationTokenService;
-    public String registration(Registration request) throws IllegalAccessException {
+    public String registration(Registration request)  {
         boolean isValidEmail = emailValidator.test(request.getEmail());
         if (isValidEmail) {
             throw new IllegalAccessException("email not valid ..");
