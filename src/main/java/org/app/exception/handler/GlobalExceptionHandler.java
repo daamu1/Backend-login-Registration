@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+
 import org.springframework.validation.FieldError;
+
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -65,9 +68,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleMailSendException(MailSendException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
     @ExceptionHandler(ConfirmationEmailSentException.class)
-    public ResponseEntity<String> handleConfirmationEmailSentException(ConfirmationEmailSentException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.OK);
+    public ResponseEntity<Map<String, String>> handleConfirmationEmailSentException(ConfirmationEmailSentException ex) {
+        Map<String, String> response = Collections.singletonMap("message", ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
 
 }

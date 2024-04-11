@@ -12,7 +12,6 @@ public class StrongPasswordValidator implements ConstraintValidator<StrongPasswo
             return false;
         }
 
-        // Password must be at least 8 characters long
         if (value.length() < 8) {
             buildConstraintViolationWithTemplate(context, "Password must be at least 8 characters long.");
             return false;
@@ -24,25 +23,21 @@ public class StrongPasswordValidator implements ConstraintValidator<StrongPasswo
             return false;
         }
 
-        // Check for at least one lowercase letter
         if (!value.matches(".*[a-z].*")) {
             buildConstraintViolationWithTemplate(context, "Password must contain at least one lowercase letter.");
             return false;
         }
 
-        // Check for at least one digit
         if (!value.matches(".*\\d.*")) {
             buildConstraintViolationWithTemplate(context, "Password must contain at least one digit.");
             return false;
         }
 
-        // Check for at least one special character
         if (!value.matches(".*[!@#$%^&*()_+\\-\\[\\]{};':\"\\\\|,.<>/?].*")) {
             buildConstraintViolationWithTemplate(context, "Password must contain at least one special character.");
             return false;
         }
 
-        // If none of the conditions are met, the password is valid
         return true;
     }
 

@@ -19,11 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
-
-import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
 @Service
 @AllArgsConstructor
@@ -32,8 +29,6 @@ public class RegistrationService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenRepository confirmationTokenRepository;
-    private final AppUserService appUserService;
-    private final ConfirmationTokenService confirmationTokenService;
 
     public RegistrationResPayload registration(RegistrationReqPayload request) {
         Optional<AppUser> existingUser = userRepository.findByEmail(request.getEmail());
