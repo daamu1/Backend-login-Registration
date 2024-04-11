@@ -5,7 +5,7 @@ import org.app.service.imp.EmailSender;
 public class EmailMessage {
 
     public static void sendConfirmationEmail(EmailSender emailSender, String email, String firstName, String token) {
-        String link = "http://localhost:8080/api/v1/confirm?token=" + token;
+        String link = "http://localhost:8000/api/v1/confirm?token=" + token;
         emailSender.send(
                 email,
                 EmailMessage.buildEmail(firstName, link)
