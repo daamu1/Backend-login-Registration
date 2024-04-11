@@ -26,7 +26,7 @@ public class RegistrationReqPayload {
     private String email;
 
     @NotBlank(message = "Password is required")
-    @StrongPassword(message = "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character")
+    @StrongPassword()
     private String password;
 
     @NotNull(message = "Role is required")

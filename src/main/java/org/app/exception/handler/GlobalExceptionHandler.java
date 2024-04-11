@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
+import org.springframework.validation.FieldError;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -29,10 +29,9 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<List<String>> handleValidationError(MethodArgumentNotValidException methodArgumentNotValidException) {
-        List<String> errorMessages = methodArgumentNotValidException.getBindingResult().getAllErrors().stream()
-                .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                .collect(Collectors.toList());
+    public ResponseEntity<Map<String, String>> handleValidationError(MethodArgumentNotValidException exception) {
+        Map<String, String> errorMessages = exception.getBindingResult().getFieldErrors().stream()
+                .collect(Collectors.toMap(FieldError::getField, DefaultMessageSourceResolvable::getDefaultMessage, (existing, replacement) -> existing));
 
         return new ResponseEntity<>(errorMessages, HttpStatus.BAD_REQUEST);
     }
