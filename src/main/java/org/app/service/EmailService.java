@@ -1,6 +1,8 @@
 package org.app.service;
 
 import lombok.AllArgsConstructor;
+import org.apache.tomcat.util.bcel.Const;
+import org.app.constant.Constant;
 import org.app.service.imp.EmailSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +23,14 @@ public class EmailService implements EmailSender {
 
     @Override
     @Async
-    public void send(String to, String email)  {
+    public void send(String to, String email) {
         try {
             MimeMessage mimeMailMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMailMessage, "utf-8");
             helper.setText(email, true);
             helper.setTo(to);
-            helper.setSubject("Confirm your email ..");
-            helper.setFrom("dakaitshady01999@gmail.com");
+            helper.setSubject(Constant.EMAIL_SUBJECT);
+            helper.setFrom(Constant.EMAIL_FROM);
             mailSender.send(mimeMailMessage);
 
         } catch (MessagingException messagingException) {
