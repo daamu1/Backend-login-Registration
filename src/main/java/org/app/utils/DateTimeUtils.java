@@ -10,4 +10,7 @@ public class DateTimeUtils {
         Instant instant = Instant.ofEpochSecond(seconds);
         return instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
+    public static long minutesToMilliseconds(int minutes) {
+        return (long) minutes * 60 * 1000;
+    }
 }
