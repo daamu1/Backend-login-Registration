@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.app.constant.Constant;
 import org.app.model.AppUser;
 import org.app.repository.UserRepository;
-import org.app.tokens.ConfirmationToken;
+import org.app.model.ConfirmationToken;
 import org.app.repository.ConfirmationTokenRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -9,37 +9,37 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+
 @Getter
 @Setter
-@Data
-@EqualsAndHashCode
-@NoArgsConstructor
-@ToString
 @Entity
 @Table(name = "app_user")
+@NoArgsConstructor
+@AllArgsConstructor
 public class AppUser implements UserDetails {
+
     @Id
-    @SequenceGenerator(name="user_sequence",
-    sequenceName = "user_sequence",
-    allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "user_sequence")
+    @SequenceGenerator(name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "user_sequence")
     private Long id;
+
     private String firstName;
+
     private String lastName;
+
+    @Column(unique = true) // Assuming email should be unique
     private String email;
+
     private String password;
+
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
-    private Boolean locked=false;
-    private Boolean enabled=false;
 
-    public AppUser(String firstName, String lastName, String email, String password, UserRole userRole) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.userRole = userRole;
-    }
+    private boolean locked = false;
+
+    private boolean enabled = false;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -55,14 +55,6 @@ public class AppUser implements UserDetails {
     @Override
     public String getUsername() {
         return email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
     @Override

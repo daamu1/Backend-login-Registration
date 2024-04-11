@@ -2,12 +2,11 @@ package org.app.service;
 
 import lombok.AllArgsConstructor;
 import org.app.model.AppUser;
-import org.app.model.Registration;
 import org.app.enums.UserRole;
+import org.app.paylaod.request.Registration;
 import org.app.registration.EmailValidator;
 import org.app.service.imp.EmailSender;
-import org.app.tokens.ConfirmationToken;
-import org.app.tokens.ConfirmationTokenService;
+import org.app.model.ConfirmationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,17 +24,17 @@ private ConfirmationTokenService confirmationTokenService;
         if (isValidEmail) {
             throw new IllegalAccessException("email not valid ..");
         }
-       String token= appUserService.signUpUser(new AppUser(request.getFirstName(),
-                request.getLastName()
-                , request.getEmail()
-                , request.getPassword(),
-                UserRole.USER));
-        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+//       String token= appUserService.signUpUser(new AppUser(request.getFirstName(),
+//                request.getLastName()
+//                , request.getEmail()
+//                , request.getPassword(),
+//                UserRole.USER));
+        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + 21;
         emailSender.send(
                 request.getEmail(),
                 buildEmail(request.getFirstName(), link));
 
-        return token;
+        return "sdf";
     }
 
     @Transactional

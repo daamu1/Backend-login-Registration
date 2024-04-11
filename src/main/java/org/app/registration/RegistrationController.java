@@ -1,7 +1,7 @@
 package org.app.registration;
 
 import lombok.AllArgsConstructor;
-import org.app.model.Registration;
+import org.app.paylaod.request.Registration;
 import org.app.service.RegistrationService;
 import org.springframework.web.bind.annotation.*;
 

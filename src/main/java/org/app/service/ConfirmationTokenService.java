@@ -1,6 +1,7 @@
-package org.app.tokens;
+package org.app.service;
 
 import lombok.AllArgsConstructor;
+import org.app.model.ConfirmationToken;
 import org.app.repository.ConfirmationTokenRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,8 @@ public class ConfirmationTokenService {
         return confirmationTokenRepository.findByToken(token);
     }
 
-    public int setConfirmedAt(String token) {
-        return confirmationTokenRepository.updateConfirmedAt(
+    public void setConfirmedAt(String token) {
+        confirmationTokenRepository.updateConfirmedAt(
                 token, LocalDateTime.now());
     }
 }
