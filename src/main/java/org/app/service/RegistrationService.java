@@ -19,8 +19,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
 @Service
 @AllArgsConstructor
@@ -81,26 +84,20 @@ public class RegistrationService {
 
     @Transactional
     public String confirmToken(String token) {
-        ConfirmationToken confirmationToken = confirmationTokenService
-                .getToken(token)
-                .orElseThrow(() ->
-                        new InvalidToken("token not found"));
-
-        if (confirmationToken.getConfirmedAt() != null) {
-            throw new EmailAlreadyUsed("email already confirmed");
-        }
-
-        LocalDateTime expiredAt = DateTimeUtils.epochToLocalDateTime(confirmationToken.getExpiresAt());
-
-        if (expiredAt.isBefore(LocalDateTime.now())) {
-            throw new InvalidToken("token expired");
-        }
-
-        confirmationTokenService.setConfirmedAt(token);
-//        appUserService.enableAppUser(
-//                confirmationToken.getAppUser().getEmail());
-        return "confirmed";
+        return confirmationTokenRepository.findByToken(token)
+                .map(confirmationToken -> {
+                    LocalDateTime expiredAt = DateTimeUtils.epochToLocalDateTime(confirmationToken.getExpiresAt());
+                    if (LocalDateTime.now().isAfter(expiredAt)) {
+                        return "link-expire";
+                    } else if (confirmationToken.getConfirmedAt() != null) {
+                        return "already_confirmed";
+                    } else {
+                        confirmationToken.setConfirmedAt(System.currentTimeMillis());
+                        confirmationToken.getAppUser().setEmailVerified(true);
+                        confirmationTokenRepository.save(confirmationToken);
+                        return "success";
+                    }
+                })
+                .orElse("invalid-token");
     }
-
-
 }

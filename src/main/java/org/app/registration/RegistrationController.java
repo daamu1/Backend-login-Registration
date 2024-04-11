@@ -1,6 +1,5 @@
 package org.app.registration;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.app.paylaod.request.RegistrationReqPayload;
 import org.app.paylaod.response.RegistrationResPayload;
@@ -27,15 +26,4 @@ public class RegistrationController {
         return ResponseEntity.ok(registrationService.registration(request));
     }
 
-    /**
-     * Confirms a user's email with a token.
-     *
-     * @param token the confirmation token
-     * @return a response entity with confirmation status
-     */
-    @GetMapping("/confirm")
-    public ResponseEntity<String> confirm(@RequestParam("token") String token) {
-        String response = registrationService.confirmToken(token);
-        return ResponseEntity.ok(response);
-    }
 }
