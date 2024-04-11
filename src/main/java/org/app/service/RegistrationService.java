@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.app.enums.UserRole;
 import org.app.exception.ConfirmationEmailSentException;
 import org.app.exception.EmailAlreadyUsed;
-import org.app.exception.InvalidToken;
 import org.app.model.AppUser;
 import org.app.paylaod.request.RegistrationReqPayload;
 import org.app.paylaod.response.RegistrationResPayload;
