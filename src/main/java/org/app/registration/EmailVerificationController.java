@@ -1,7 +1,7 @@
 package org.app.registration;
 
 import lombok.RequiredArgsConstructor;
-import org.app.service.RegistrationService;
+import org.app.service.imp.RegistrationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

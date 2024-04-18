@@ -1,18 +1,16 @@
 package org.app.repository;
 
+import org.app.enums.UserRole;
 import org.app.model.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Repository
-@Transactional(readOnly = true)
+//@Transactional(readOnly = true)
 public interface UserRepository extends JpaRepository<AppUser, Long> {
-    Optional<AppUser> findByEmail(String email);
+    Optional<AppUser> findByEmailAndUserRole(String email, UserRole userRole);
 
 //    @Transactional
 //    @Modifying
@@ -21,4 +19,6 @@ public interface UserRepository extends JpaRepository<AppUser, Long> {
 //    void enableAppUser(String email);
 
     Optional<AppUser> findByEmailAndEmailVerified(String email, boolean isEmailVerified);
+
+    Optional<AppUser> findByEmail(String email);
 }

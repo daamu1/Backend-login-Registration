@@ -1,6 +1,6 @@
 package org.app.utils;
 
-import org.app.service.imp.EmailSender;
+import org.app.service.EmailSender;
 
 public class EmailMessage {
 
