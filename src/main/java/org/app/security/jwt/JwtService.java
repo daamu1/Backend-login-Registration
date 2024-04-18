@@ -120,17 +120,20 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+
     public List<GrantedAuthority> getAuthoritiesFromJWT(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(secretKey)
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(getSignInKey()) // use the initialized key
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
-        // get the roles claim as a comma-separated string
-        String rolesClaim = claims.get(Constant.AUTHORITIES_CLAIM, String.class);
 
-        if (rolesClaim != null) {
+        // get the roles claim as a comma-separated string
+        String rolesClaim = claims.get("authorities", String.class); // Ensure to use the correct claim name
+
+        if (rolesClaim != null && !rolesClaim.isEmpty()) {
             return Arrays.stream(rolesClaim.split(","))
-                    .map(SimpleGrantedAuthority::new)
+                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                     .collect(Collectors.toList());
         } else {
             return Collections.emptyList();
